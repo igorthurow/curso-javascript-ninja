@@ -1,3 +1,5 @@
+(function () {
+'use strict';
 /*
 1. Envolva todo o conteúdo desse desafio em uma IIFE.
 2. Adicione a diretiva 'use strict';
@@ -14,7 +16,14 @@ Ex: no caso do nome ser "Fernando", deve mostrar as frases:
 E assim por diante, até a última.
 */
 console.log( 'As letras do seu nome:' );
-// ?
+//
+
+var name = 'Igor';
+
+for (var i = 0; i < name.length; i++) {
+	console.log(name.charAt(i) + ' é a ' + (i + 1) + 'ª letra do meu nome.');
+}
+
 
 /*
 - Declare uma variável chamada `fullName`, que receba seu nome completo,
@@ -29,7 +38,38 @@ curso para fazer isso funcionar corretamente :)
 console.log para cada formato.
 */
 console.log( '\nNome convertido à partir de um slug:' );
-// ?
+// 
+
+var fullName = 'carolina-eberhardt-da-silva-ama-igor-thurow-da-silveira';
+var separator = ('-');
+
+
+//Sistema:
+
+/*var indice = 0;
+var test = 1;
+var nameFinal = '';
+
+while (test !== indice) {
+	var upperName = fullName.charAt(indice).toUpperCase();
+	test = indice;
+	indice += fullName.slice(indice).indexOf(separator) + 1;
+	test !== indice ? 
+	upperName += fullName.slice(test +1, indice) :
+	upperName += fullName.slice(test +1);
+	nameFinal += upperName.split(separator).join(' ');
+}
+
+console.log(nameFinal);
+*/
+var newName = fullName.split(separator).reduce(function(acumulado, atual, index ) {
+	return index === 0 ? 
+	atual[0].toUpperCase() + atual.slice(1).toLowerCase() :
+	acumulado + ' ' + atual[0].toUpperCase() + atual.slice(1).toLowerCase();
+}, '');
+
+console.log(fullName);
+console.log(newName);
 
 /*
 - Crie um array com 5 nomes. Reduza esses nomes a uma única string, separando
@@ -41,21 +81,36 @@ O resultado final deve ficar mais ou menos assim:
 5 nomes foi somente uma sugestão ;)
 */
 console.log( '\nMeus amigos:' );
-// ?
+//
 
+var arr = ['Igor','Carol','Surdo','Seco','Tassinari', 'Léo', 'Seco', 'Tiago', 'Rafael'];
+
+var reduceArr = arr.reduce(function (acumulado, atual, index){
+	return index +1 !== arr.length  ?  acumulado + ', ' + atual : 
+	acumulado + ' e ' + atual + ' são meus amigos.';
+});
+
+console.log(reduceArr)
 /*
 Usando o replace(), faça a string "Roberto" virar "Roberta".
 Mostre o resultado no console.
 */
 console.log( '\nEra "Roberto", agora é:' );
-// ?
+//
+
+var replacer = 'Roberto';
+console.log(replacer.replace('to', 'ta'));
 
 /*
 Mostre no console a parte "nando" da string "Fernando". Use o método que
 faz a busca do final para o início da string.
 */
 console.log( '\nParte de uma string:' );
-// ?
+//
+
+var stringPart = 'Fernando';
+
+console.log('Fernando'.substring(stringPart.length, stringPart.indexOf('n')));
 
 /*
 Declare uma variável chamada `myName`, que receba o seu primeiro nome,
@@ -67,4 +122,15 @@ de qualquer tamanho, escrito de qualquer forma.
 Ex.: Nomes que deveriam funcionar: "Fernando", "RoBertO", "gabriEla", etc.
 */
 console.log( '\nNome com letras intercaladas entre caixa alta e baixa:' );
-// ?
+//
+
+var myName = 'Thurow';
+
+for (var i = 0, transformed = ''; i < myName.length; i++) {
+	i % 2 === 0 ? transformed += myName.charAt(i).toUpperCase() :
+	transformed += myName.charAt(i).toLowerCase();
+}
+
+console.log(transformed)
+
+})();
