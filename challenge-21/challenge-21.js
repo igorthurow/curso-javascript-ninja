@@ -36,15 +36,16 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
     function timer(){
         if (counter <= ($uservalue.value ? $uservalue.value : Infinity)) {
             $area.innerHTML = counter;
-            setTimeout(time, 1000);
+            var temporizador = setTimeout(time, 1000);
         }
+        $stop.addEventListener('click', function(){
+            return clearTimeout(temporizador);
+        });
     };
+
     //Botões de controle
     $start.addEventListener('click', function(){
         return timer();
-    });
-    $stop.addEventListener('click', function(){
-        return clearTimeout(time);
     });
     $reset.addEventListener('click', function(){
         counter = 0;
