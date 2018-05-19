@@ -46,5 +46,6 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
         counter = 0;
         $area.innerHTML = 0;
     });
+    
 
 })(document, window);
