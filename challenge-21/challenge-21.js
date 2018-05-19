@@ -25,31 +25,33 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
     var $reset = d.querySelector('[data-js=reset]');
     var $area = d.querySelector('[data-js=cronometer]');
     var $uservalue = d.querySelector('[data-js=uservalue]');
-    var counter =+ 1;
+    var counter = 0;
 
     //Funcões do cronômetro
     var time = function(){
+        $area.innerHTML = counter;
         counter++;
         return timer();
     }
 
     function timer(){
-        if (counter <= ($uservalue.value ? $uservalue.value : Infinity)) {
-            $area.innerHTML = counter;
+        if (counter <= ($uservalue ? $uservalue : Infinity)) {
             var temporizador = setTimeout(time, 1000);
         }
         $stop.addEventListener('click', function(){
             return clearTimeout(temporizador);
         });
+        $reset.addEventListener('click', function(){
+            counter = 0;
+            $area.innerHTML = '';
+            return clearTimeout(temporizador);
+        });
     };
 
-    //Botões de controle
+    //Botão de start
     $start.addEventListener('click', function(){
+        $uservalue = d.querySelector('[data-js=uservalue]').value;
         return timer();
-    });
-    $reset.addEventListener('click', function(){
-        counter = 0;
-        $area.innerHTML = 0;
     });
 
 })(document, window);
