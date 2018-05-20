@@ -19,39 +19,56 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
 (function(d, w){
     'use strict';
 
-    //Dados do usuário
+    //Botões
     var $start = d.querySelector('[data-js=start]');
     var $stop = d.querySelector('[data-js=stop]');
     var $reset = d.querySelector('[data-js=reset]');
-    var $area = d.querySelector('[data-js=cronometer]');
-    var $uservalue = d.querySelector('[data-js=uservalue]');
-    var counter = 0;
 
-    //Funcões do cronômetro
-    var time = function(){
-        $area.innerHTML = counter;
-        counter++;
+    //Cronômetro
+    var $area = d.querySelector('[data-js=cronometer]');
+
+    //Entrada do usuário
+    var $uservalue = d.querySelector('[data-js=uservalue]');
+
+    //Variáveis que serão usadas
+    var interval = 1;
+    var limit;
+    var temporizador;
+
+    //Função para startar o cronômetro
+    function timer(){
+        if (interval <= (limit ? limit : Infinity)) {
+            temporizador = setTimeout(cronometerSystem, 1000);
+        }
+        $stop.addEventListener('click', stopCronometer, false);
+        $reset.addEventListener('click', resetCronometer, false);
+    }; $start.addEventListener('click', startCronometer, false);
+
+    //Funcões do cronômetro 
+    var cronometerSystem = function(){
+        $area.innerHTML = interval;
+        interval++;
+        if (limit == $area.innerHTML) {
+            $uservalue.disabled = false;
+            $start.disabled = false;
+        }
+        return timer();
+    };
+    function stopCronometer(){
+        $start.disabled = false;
+        $uservalue.disabled = false;
+        return clearTimeout(temporizador);
+    }
+    function resetCronometer(){
+        interval = 1;
+        $area.innerHTML = '0';
+        stopCronometer();
+    }
+    function startCronometer(){
+        this.disabled = true;
+        $uservalue.disabled = true;
+        limit = $uservalue.value;
         return timer();
     }
-
-    function timer(){
-        if (counter <= ($uservalue ? $uservalue : Infinity)) {
-            var temporizador = setTimeout(time, 1000);
-        }
-        $stop.addEventListener('click', function(){
-            return clearTimeout(temporizador);
-        });
-        $reset.addEventListener('click', function(){
-            counter = 0;
-            $area.innerHTML = '';
-            return clearTimeout(temporizador);
-        });
-    };
-
-    //Botão de start
-    $start.addEventListener('click', function(){
-        $uservalue = d.querySelector('[data-js=uservalue]').value;
-        return timer();
-    });
 
 })(document, window);
