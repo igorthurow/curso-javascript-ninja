@@ -32,12 +32,11 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
 
     //Variáveis que serão usadas
     var interval = 1;
-    var limit;
     var temporizador;
 
     //Função para startar o cronômetro
     function timer(){
-        if (interval <= (limit ? limit : Infinity)) {
+        if (interval <= ($uservalue.value ? $uservalue.value : Infinity)) {
             temporizador = setTimeout(cronometerSystem, 1000);
         }
         $stop.addEventListener('click', stopCronometer, false);
@@ -48,7 +47,7 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
     var cronometerSystem = function(){
         $area.innerHTML = interval;
         interval++;
-        if (limit == $area.innerHTML) {
+        if ($uservalue.value == $area.innerHTML) {
             $uservalue.disabled = false;
             $start.disabled = false;
         }
@@ -67,7 +66,6 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
     function startCronometer(){
         this.disabled = true;
         $uservalue.disabled = true;
-        limit = $uservalue.value;
         return timer();
     }
 
