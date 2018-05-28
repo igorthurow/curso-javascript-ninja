@@ -45,9 +45,9 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
 
     //Funcões do cronômetro 
     var cronometerSystem = function(){
-        $area.innerHTML = interval;
+        $area.value = interval;
         interval++;
-        if ($uservalue.value == $area.innerHTML) {
+        if ($uservalue.value == $area.value) {
             $uservalue.disabled = false;
             $start.disabled = false;
         }
@@ -60,7 +60,7 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
     }
     function resetCronometer(){
         interval = 1;
-        $area.innerHTML = '0';
+        $area.value = '0';
         stopCronometer();
     }
     function startCronometer(){
