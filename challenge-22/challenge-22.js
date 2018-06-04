@@ -53,10 +53,11 @@
 
   function sum(){
     console.log(arguments);
-    var result = Array.prototype.reduce.call( arguments, function(acumulated, actual, index){
-      if (actual)
-        console.log(acumulated + ' mais ' + actual);
-      return (+acumulated) + (+actual);
+    var result = Array.prototype.reduce.call( arguments,
+      function(accumulated, actual, index){
+        if (actual)
+          console.log(accumulated + ' mais ' + actual);
+        return Number(accumulated) + Number(actual);
     });
     return result;
   }
