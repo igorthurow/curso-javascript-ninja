@@ -55,7 +55,7 @@
     console.log(arguments);
     var result = Array.prototype.reduce.call( arguments, function(acumulated, actual, index){
       if (actual)
-        console.log((acumulated) + ' mais ' + (actual));
+        console.log(acumulated + ' mais ' + actual);
       return (+acumulated) + (+actual);
     });
     return result;
