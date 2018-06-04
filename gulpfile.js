@@ -4,12 +4,12 @@ var gulp = require('gulp'),
   rename = require('gulp-rename');
 
 gulp.task('watch', function () {
-  gulp.watch('challenge-22/*.less', ['less']);
+  gulp.watch('challenge-23/*.less', ['less']);
 });
 
 gulp.task('less', function () {
 
-  return gulp.src('challenge-22/*.less')
+  return gulp.src('challenge-23/*.less')
     .pipe(less().on('error', function (err) {
       console.log(err);
     }))
@@ -17,7 +17,7 @@ gulp.task('less', function () {
       console.log(err);
     }))
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('challenge-22/'));
+    .pipe(gulp.dest('challenge-23/'));
 });
 
 gulp.task('default', ['less', 'watch']);
